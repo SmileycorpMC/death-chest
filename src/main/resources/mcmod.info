@@ -1,0 +1,16 @@
+[
+{
+  "modid": "deathchest",
+  "name": "Death Chest",
+  "description": "",
+  "version": "1.4",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Smileycorp"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
