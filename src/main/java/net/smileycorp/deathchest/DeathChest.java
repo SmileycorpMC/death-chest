@@ -25,6 +25,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
+import net.minecraft.world.dimension.Dimension;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -37,7 +38,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.config.ModConfig;
 
 @EventBusSubscriber
-@Mod("deathchest")
+@Mod(value = "deathchest")
 public class DeathChest {
 	
 	public static BooleanValue hasSkull;
@@ -79,14 +80,14 @@ public class DeathChest {
 						
 						ChestTileEntity te = new ChestTileEntity();
 						
-						te.setCustomName(new StringTextComponent(player.getDisplayName().getString()+"'s Loot"));
+						te.setCustomName(player.getDisplayName().appendText("'s Loot"));
 						for (int slot = 0; slot<items.size(); slot++) {
 							te.setInventorySlotContents(slot, items.get(slot));
 						}
 						if(lockChest.get()) {
 							nbt=te.write(new CompoundNBT());
 							nbt.putString("Lock", "Death Journal "+getDeathValue(player, pos));
-							te.read(world.getBlockState(pos), nbt);
+							te.read(nbt);
 							te.markDirty();
 						}
 						world.setTileEntity(pos, te);
@@ -100,14 +101,14 @@ public class DeathChest {
 								world.setBlockState(pos, Blocks.CHEST.getDefaultState());
 							}
 							te = new ChestTileEntity();
-							te.setCustomName(new StringTextComponent(player.getDisplayName().getString()+"'s Loot"));
+							te.setCustomName(player.getDisplayName().appendText("'s Loot"));
 							for (int slot = 0; slot<items2.size(); slot++) {
 								te.setInventorySlotContents(slot, items2.get(slot));
 							}
 							if(lockChest.get()) {
 								nbt=te.write(new CompoundNBT());
 								nbt.putString("Lock", "Death Journal "+getDeathValue(player, pos));
-								te.read(world.getBlockState(pos), nbt);
+								te.read(nbt);
 								te.markDirty();
 							}
 							world.setTileEntity(pos, te);
@@ -134,12 +135,13 @@ public class DeathChest {
 		PlayerEntity player = event.getOriginal();
 		if (player!=null&&event.isWasDeath()&&giveJournal.get()) {
 			BlockPos pos = player.getPosition();
-			long time = player.getEntityWorld().getGameTime();
+			Dimension dim = player.getEntityWorld().getDimension();
+			long time = dim.getWorldTime();
 			CompoundNBT nbt = new CompoundNBT();
 			nbt.putInt("generation", 3);
 			nbt.putString("title", "Death Journal");
 			nbt.putString("author", player.getDisplayName().getString());
-			String contents = "{\"text\":\"Death Time: "+time+"\\n\\nDimension: "+player.getEntityWorld().getDimensionKey().getLocation()+"\\n";
+			String contents = "{\"text\":\"Death Time: "+time+"\\n\\nDimension: "+dim.getType().getRegistryName()+"\\n";
 			if (journalPos.get()) {
 				contents += "\\nPosition: "+pos.getX()+", "+pos.getY()+", "+pos.getZ();
 			}
