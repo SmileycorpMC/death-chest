@@ -36,7 +36,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.mojang.authlib.GameProfile;
 
 @EventBusSubscriber
-@Mod(modid = "deathchest")
+@Mod(modid = "deathchest", acceptableRemoteVersions="*")
 public class DeathChest {
 	
 	public static boolean hasSkull;
