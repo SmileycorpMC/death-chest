@@ -3,7 +3,7 @@
   "modid": "deathchest",
   "name": "Death Chest",
   "description": "",
-  "version": "1.5",
+  "version": "1.6.0",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",

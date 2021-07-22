@@ -1,9 +1,5 @@
 package net.smileycorp.deathchest;
 
-import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +16,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -81,7 +76,7 @@ public class DeathChest {
 						}
 						if(lockChest) {
 							nbt=te.writeToNBT(new NBTTagCompound());
-							nbt.setString("Lock", getDeathValue(player, pos));
+							nbt.setString("Lock", player.getUniqueID().toString());
 							te.readFromNBT(nbt);
 							te.markDirty();
 						}
@@ -98,7 +93,7 @@ public class DeathChest {
 							}
 							if(lockChest) {
 								nbt=te.writeToNBT(new NBTTagCompound());
-								nbt.setString("Lock", getDeathValue(player, pos));
+								nbt.setString("Lock", player.getUniqueID().toString());
 								te.readFromNBT(nbt);
 								te.markDirty();
 							}
@@ -128,7 +123,6 @@ public class DeathChest {
 			if (player!=null&&event.isWasDeath()&&giveJournal) {
 				BlockPos pos = player.getPosition();
 				long time = player.getEntityWorld().getWorldTime();
-				int dim = player.world.provider.getDimension();
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setInteger("generation", 3);
 				nbt.setString("title", "Death Journal");
@@ -143,7 +137,7 @@ public class DeathChest {
 				nbt.setTag("pages", list);
 				ItemStack stack = new ItemStack(Items.WRITTEN_BOOK);
 				if(lockChest) {
-					nbt.setString("Key", getDeathValue(player, pos));
+					nbt.setString("Key", player.getUniqueID().toString());
 				}
 				stack.setTagCompound(nbt);
 				if(!event.getEntityPlayer().inventory.addItemStackToInventory(stack)) {
@@ -196,14 +190,6 @@ public class DeathChest {
 				items.add(stack);
 			}
 		}
-	}
-	
-	private static String getDeathValue(EntityPlayer player, BlockPos pos) {
-		byte[] bytes = ByteBuffer.allocate(Integer.BYTES).putInt(pos.getX()).array();
-		ArrayUtils.addAll(bytes, ByteBuffer.allocate(Integer.BYTES).putInt(pos.getY()).array());
-		ArrayUtils.addAll(bytes, ByteBuffer.allocate(Integer.BYTES).putInt(pos.getZ()).array());
-		ArrayUtils.addAll(bytes, EntityPlayer.getUUID(player.getGameProfile()).toString().getBytes());
-		return new String(bytes);
 	}
 	
 	static class Config {
