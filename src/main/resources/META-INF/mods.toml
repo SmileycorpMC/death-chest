@@ -1,13 +1,13 @@
 modLoader="javafml" #mandatory
-loaderVersion="[28,)" #mandatory (26 is current forge version)
-issueTrackerURL="http://my.issue.tracker/" #optional
-[[mods]] #mandatory
-modId="deathchest" #mandatory
-version="${file.jarVersion}" #mandatory
-displayName="Death Chest" #mandatory
-logoFile="deathchest.png" #optional
-credits="" #optional
-authors="Smileycorp" #optional
-description='''
+loaderVersion="[34,)"
+license="GNU LESSER GENERAL PUBLIC LICENSE Version 2.1"
 
-'''
+[[mods]]
+modId="deathchest"
+version="1.6.0"
+displayName="Death Chest"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/death-chest" #optional
+updateJSONURL=""
+credits="Smileycorp" #optional
+authors="Smileycorp" #optional
+description=""

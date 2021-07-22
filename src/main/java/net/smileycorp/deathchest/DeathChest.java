@@ -1,117 +1,127 @@
 package net.smileycorp.deathchest;
 
-import java.nio.ByteBuffer;
-
-import org.apache.commons.lang3.ArrayUtils;
-
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
-import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.tileentity.TileEntitySkull;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.world.World;
-
-import net.minecraftforge.common.config.Configuration;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.StringTag;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.fluids.BlockFluidBase;
+import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.config.ModConfig;
 
 @EventBusSubscriber
-@Mod(modid = "deathchest", acceptableRemoteVersions="*", version = "1.5")
+@Mod("deathchest")
 public class DeathChest {
 	
-	public static boolean hasSkull;
-	public static boolean lockChest;
-	public static boolean giveJournal;
-	public static boolean journalPos;
+	public static BooleanValue hasSkull;
+	public static BooleanValue lockChest;
+	public static BooleanValue giveJournal;
+	public static BooleanValue journalPos;
 	
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event){
-		Config.config = new Configuration(event.getSuggestedConfigurationFile());
-		Config.syncConfig();
+	public DeathChest() {
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.config);
 	}
 	
 	@SubscribeEvent
 	public static void onDeathEvent(LivingDeathEvent event) {
-		World world = event.getEntity().world;
-		if (event.getEntityLiving() instanceof EntityPlayer &! world.isRemote) {
-			EntityPlayer player = (EntityPlayer)event.getEntityLiving();
+		Level world = event.getEntity().level;
+		if (event.getEntityLiving() instanceof Player &! world.isClientSide) {
+			Player player = (Player)event.getEntityLiving();
 			NonNullList<ItemStack> items = NonNullList.create();
 			NonNullList<ItemStack> items2 = NonNullList.create();
-			InventoryPlayer inventory = player.inventory;
-			for (ItemStack stack : inventory.mainInventory) {
+			Inventory inventory = player.getInventory();
+			for (ItemStack stack : inventory.items) {
 				addStack(stack, items, items2, 27);
 			}
-			for (ItemStack stack : inventory.armorInventory) {
+			for (ItemStack stack : inventory.armor) {
 				addStack(stack, items, items2, 27);
 			}
-			addStack(inventory.offHandInventory.get(0), items, items2, 27);
+			addStack(inventory.offhand.get(0), items, items2, 27);
 			if (items.size()>0) {
-				for (double i = player.getPosition().getY(); i < 255; i++) {
-					BlockPos pos = new BlockPos(player.getPosition().getX(), i, player.getPosition().getZ());
+				for (double i = player.position().y; i < 255; i++) {
+					BlockPos pos = new BlockPos(player.position());
 					Block block = world.getBlockState(pos).getBlock();
-					if (world.isAirBlock(pos)|| block instanceof BlockBush || block instanceof BlockFluidBase){
-						world.setBlockState(pos, Blocks.CHEST.getDefaultState());
-
+					if (world.isEmptyBlock(pos)|| block instanceof BushBlock || block instanceof LiquidBlock){
+						if (block == Blocks.WATER) {
+							world.setBlockAndUpdate(pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.WATERLOGGED, true));
+						} else {
+							world.setBlockAndUpdate(pos, Blocks.CHEST.defaultBlockState());
+						}
 						
-						NBTTagCompound nbt;
+						CompoundTag nbt;
 						
-						TileEntityChest te = new TileEntityChest();
+						ChestBlockEntity te = new ChestBlockEntity(pos, Blocks.CHEST.defaultBlockState());
 						
-						te.setCustomName(player.getDisplayName().getUnformattedText()+"'s Loot");
+						te.setCustomName(new TextComponent(player.getDisplayName().getString()+"'s Loot"));
 						for (int slot = 0; slot<items.size(); slot++) {
-							te.setInventorySlotContents(slot, items.get(slot));
+							te.setItem(slot, items.get(slot));
 						}
-						if(lockChest) {
-							nbt=te.writeToNBT(new NBTTagCompound());
-							nbt.setString("Lock", getDeathValue(player, pos));
-							te.readFromNBT(nbt);
-							te.markDirty();
+						if(lockChest.get()) {
+							nbt=te.save(new CompoundTag());
+							nbt.putString("Lock", player.getStringUUID());
+							te.load(nbt);
+							te.setChanged();
 						}
-						world.setTileEntity(pos, te);
+						world.setBlockEntity(te);
 						
 						if (items2.size()>0) {
-							pos = pos.up();
-							block = world.getBlockState(pos).getBlock();
-							world.setBlockState(pos, Blocks.CHEST.getDefaultState());
-							te = new TileEntityChest();
-							te.setCustomName(player.getDisplayName().getUnformattedText()+"'s Loot");
+							pos = pos.above();
+							if (world.isEmptyBlock(pos)) {
+								world.setBlockAndUpdate(pos, Blocks.CHEST.defaultBlockState());
+							} else {
+								if (block == Blocks.WATER) {
+									world.setBlockAndUpdate(pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.WATERLOGGED, true));
+								} else {
+									world.setBlockAndUpdate(pos, Blocks.CHEST.defaultBlockState());
+								}
+							}
+							te = new ChestBlockEntity(pos, Blocks.CHEST.defaultBlockState());
+							te.setCustomName(new TextComponent(player.getDisplayName().getString()+"'s Loot"));
 							for (int slot = 0; slot<items2.size(); slot++) {
-								te.setInventorySlotContents(slot, items2.get(slot));
+								te.setItem(slot, items2.get(slot));
 							}
-							if(lockChest) {
-								nbt=te.writeToNBT(new NBTTagCompound());
-								nbt.setString("Lock", getDeathValue(player, pos));
-								te.readFromNBT(nbt);
-								te.markDirty();
+							if(lockChest.get()) {
+								nbt=te.save(new CompoundTag());
+								nbt.putString("Lock", player.getStringUUID());
+								te.load(nbt);
+								te.setChanged();
 							}
-							world.setTileEntity(pos, te);
+							world.setBlockEntity(te);
 						}
 						
-						if (hasSkull) {
-							if(world.isAirBlock(pos.up())) {
-								world.setBlockState(pos.up(), Blocks.SKULL.getDefaultState());
-								TileEntitySkull skull = new TileEntitySkull();
-								skull.setPlayerProfile(player.getGameProfile());
-								world.setTileEntity(pos.up(), skull);
+						if (hasSkull.get()) {
+							if(world.isEmptyBlock(pos.above())) {
+								world.setBlockAndUpdate(pos.above(), Blocks.PLAYER_HEAD.defaultBlockState());
+								SkullBlockEntity skull = new SkullBlockEntity(pos.above(), Blocks.PLAYER_HEAD.defaultBlockState());
+								skull.setOwner(player.getGameProfile());
+								world.setBlockEntity(skull);
 							}
+						}
+						
+						for (ServerPlayer splayer : world.getServer().getPlayerList().getPlayers()){
+							splayer.sendMessage(event.getSource().getLocalizedDeathMessage(player), null);
 						}
 						event.setCanceled(true);
 						break;
@@ -123,62 +133,59 @@ public class DeathChest {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onRespawnEvent(PlayerEvent.Clone event) {
-		EntityPlayer player = event.getOriginal();
-		if (!player.world.isRemote) {
-			if (player!=null&&event.isWasDeath()&&giveJournal) {
-				BlockPos pos = player.getPosition();
-				long time = player.getEntityWorld().getWorldTime();
-				int dim = player.world.provider.getDimension();
-				NBTTagCompound nbt = new NBTTagCompound();
-				nbt.setInteger("generation", 3);
-				nbt.setString("title", "Death Journal");
-				nbt.setString("author", player.getDisplayName().getFormattedText());
-				String contents = "{\"text\":\"Death Time: "+time+"\\n\\nDimension: "+player.world.provider.getDimensionType().getName()+"\\n";
-				if (journalPos) {
+		Player player = event.getOriginal();
+		if (!player.level.isClientSide) {
+			if (player!=null&&event.isWasDeath()&&giveJournal.get()) {
+				BlockPos pos = player.blockPosition();
+				long time = player.level.getGameTime();
+				CompoundTag nbt = new CompoundTag();
+				nbt.putInt("generation", 3);
+				nbt.putString("title", "Death Journal");
+				nbt.putString("author", player.getDisplayName().getString());
+				String contents = "{\"text\":\"Death Time: "+time+"\\n\\nDimension: "+player.level.dimension().toString()+"\\n";
+				if (journalPos.get()) {
 					contents += "\\nPosition: "+pos.getX()+", "+pos.getY()+", "+pos.getZ();
 				}
 				contents+="\"}";
-				NBTTagList list = new NBTTagList();
-				list.appendTag(new NBTTagString(contents));
-				nbt.setTag("pages", list);
+				ListTag list = new ListTag();
+				list.add(StringTag.valueOf(contents));
+				nbt.put("pages", list);
 				ItemStack stack = new ItemStack(Items.WRITTEN_BOOK);
-				if(lockChest) {
-					nbt.setString("Key", getDeathValue(player, pos));
+				if(lockChest.get()) {
+					nbt.putString("Key", player.getStringUUID());
 				}
-				stack.setTagCompound(nbt);
-				if(!event.getEntityPlayer().inventory.addItemStackToInventory(stack)) {
-					if(!event.getEntityPlayer().getEntityWorld().isRemote) {
-						event.getEntityPlayer().entityDropItem(stack, 1F);
-					}
+				stack.setTag(nbt);
+				if(!event.getPlayer().getInventory().add(stack)) {
+					event.getPlayer().drop(stack, true);
 				}
-				event.getEntityPlayer().inventoryContainer.detectAndSendChanges();
-				event.getEntityPlayer().inventory.markDirty();
+				event.getPlayer().containerMenu.sendAllDataToRemote();
+				event.getPlayer().getInventory().setChanged();
 			}
 		}
 	}
-	
+		
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void interactBlockEvent(RightClickBlock event) {
-		EntityPlayer player = event.getEntityPlayer();
-		World world = player.world;
-		if (!world.isRemote) {
+		Player player = event.getPlayer();
+		Level world = player.level;
+		if (!world.isClientSide) {
 			BlockPos pos = event.getPos();
-			if (world.getTileEntity(pos) instanceof TileEntityChest) {
-				TileEntityChest te = (TileEntityChest) world.getTileEntity(pos);
-				NBTTagCompound nbt = te.writeToNBT(new NBTTagCompound());
+			if (world.getBlockEntity(pos) instanceof ChestBlockEntity) {
+				ChestBlockEntity te = (ChestBlockEntity) world.getBlockEntity(pos);
+				CompoundTag nbt = te.save(new CompoundTag());
 				String lock = nbt.getString("Lock");
 				if (lock != null) {
-					ItemStack stack = player.getHeldItem(event.getHand());
+					ItemStack stack = player.getItemInHand(event.getHand());
 					if (stack.getItem() == Items.WRITTEN_BOOK) {
-						NBTTagCompound stackNBT = stack.getTagCompound();
-						int gen = stackNBT.getInteger("generation");
+						CompoundTag stackNBT = stack.getTag();
+						int gen = stackNBT.getInt("generation");
 						if (gen == 3) {
 							String key = stackNBT.getString("Key");
 							if (key != null && key.equals(lock)) {
-								nbt.removeTag("Lock");
-								te.readFromNBT(nbt);
-								te.markDirty();
-								player.sendStatusMessage(new TextComponentString("Chest has been unlocked."), false);
+								nbt.remove("Lock");
+								te.load(nbt);
+								te.setChanged();
+								player.sendMessage(new TextComponent("Chest has been unlocked."), null);
 							}
 						}
 					}
@@ -198,32 +205,24 @@ public class DeathChest {
 		}
 	}
 	
-	private static String getDeathValue(EntityPlayer player, BlockPos pos) {
-		byte[] bytes = ByteBuffer.allocate(Integer.BYTES).putInt(pos.getX()).array();
-		ArrayUtils.addAll(bytes, ByteBuffer.allocate(Integer.BYTES).putInt(pos.getY()).array());
-		ArrayUtils.addAll(bytes, ByteBuffer.allocate(Integer.BYTES).putInt(pos.getZ()).array());
-		ArrayUtils.addAll(bytes, EntityPlayer.getUUID(player.getGameProfile()).toString().getBytes());
-		return new String(bytes);
-	}
-	
 	static class Config {
 		
-		public static Configuration config;
+		public static final ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
+		public static final ForgeConfigSpec config;
 	
-		public static void syncConfig(){
-			try{
-				config.load();
-				//general
-				hasSkull = config.get(Configuration.CATEGORY_GENERAL, "hasSkull",  false, "whether a death chest spawns with a skull above it").getBoolean();
-				giveJournal = config.get(Configuration.CATEGORY_GENERAL, "giveJournal", true, "whether players should be given a journal of their death").getBoolean();
-				lockChest = config.get(Configuration.CATEGORY_GENERAL, "lockChest", true, "whether chests should be locked so that only its owner's journal can open it\nonly works if giveJournal is true").getBoolean();
-				journalPos = config.get(Configuration.CATEGORY_GENERAL, "journalPos", true, "whether journal shows death position\nonly works if giveJournal is true").getBoolean();
-				
-				
-			} catch (Exception e) {
-			} finally {
-				if (config.hasChanged()) config.save();
-			}
+		 static {
+			builder.push("general");
+			hasSkull = builder.comment("whether a death chest spawns with a skull above it\n")
+						.define("hasSkull", false);
+			giveJournal = builder.comment("whether players should be given a journal of their death\n")
+						.define("giveJournal", true);
+			lockChest = builder.comment("whether chests should be locked so that only its owner's journal can open it\nonly works if giveJournal is true\n")
+						.define("lockChest", true);
+			journalPos = builder.comment("whether journal shows death position\nonly works if giveJournal is true\n")
+						.define("journalPos", true);
+			
+			builder.pop();
+			config = builder.build();
 		}
 	
 	}
