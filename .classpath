@@ -21,22 +21,38 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" output="bin/test" path="src/test/java">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="O:\forge dev\1.18\death-chest\build\natives"/>
+			<attribute name="test" value="true"/>
+			<attribute name="gradle_scope" value="test"/>
+			<attribute name="gradle_used_by_scope" value="test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="bin/test" path="src/test/resources">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="O:\forge dev\1.18\death-chest\build\natives"/>
+			<attribute name="test" value="true"/>
+			<attribute name="gradle_scope" value="test"/>
+			<attribute name="gradle_used_by_scope" value="test"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-17.0.1">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18-38.0.14_mapped_official_1.18/forge-1.18-38.0.14_mapped_official_1.18.jar" sourcepath="C:/Users/Owner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18-38.0.14_mapped_official_1.18/forge-1.18-38.0.14_mapped_official_1.18-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18.1-39.0.64_mapped_official_1.18/forge-1.18.1-39.0.64_mapped_official_1.18.jar" sourcepath="C:/Users/Owner/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.18.1-39.0.64_mapped_official_1.18/forge-1.18.1-39.0.64_mapped_official_1.18-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.18/client-extra.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/forge_gradle/minecraft_repo/versions/1.18.1/client-extra.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlloader/1.18-38.0.14/da632c65c8b370dafb59e792fed7866aff5ed2f4/fmlloader-1.18-38.0.14.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlloader/1.18-38.0.14/a376ede53153e0c37d42555676e4a90c5b9ccf26/fmlloader-1.18-38.0.14-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlloader/1.18.1-39.0.64/9f910c4d26db33738668768bb9501f8c7d6b49bd/fmlloader-1.18.1-39.0.64.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlloader/1.18.1-39.0.64/af09e21e4fbd048bc4a06845bb979d9b201941b9/fmlloader-1.18.1-39.0.64-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -71,12 +87,12 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/securejarhandler/0.9.54/24b670f2c026ec9777e64a2c2126ebc8635dbe8d/securejarhandler-0.9.54.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/securejarhandler/0.9.54/abbfe7c00af7379dd31f482f21d36713da517c00/securejarhandler-0.9.54-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/securejarhandler/1.0.1/cefd70d447a84ea4949fda0ee654f9a95f72d4da/securejarhandler-1.0.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/securejarhandler/1.0.1/c126854e07c090d7735639454938a30c8c749fba/securejarhandler-1.0.1-sources.jar">
 		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
+			<attribute name="gradle_used_by_scope" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/modlauncher/9.0.7/ebe8650527b513823874449e054db053b686b494/modlauncher-9.0.7.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/modlauncher/9.0.7/77f1c49820136ba07fde51fe760c7cb714067225/modlauncher-9.0.7-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/modlauncher/9.1.0/64d27cad2f5340065ed0b29f45a264ba47b1ee4f/modlauncher-9.1.0.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/modlauncher/9.1.0/2e832e145860a6fe895f3951dc1b4b73dd79f751/modlauncher-9.1.0-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -86,27 +102,27 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/9.1/8b971b182eb5cf100b9e8d4119152d83e00e0fdd/asm-commons-9.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/9.1/87a45a18693ec2d1eed3beb40ac47f82feb7fb27/asm-commons-9.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/9.2/f4d7f0fc9054386f2893b602454d48e07d4fbead/asm-commons-9.2.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-commons/9.2/acfb5bbdf1cd11aaff127233c641a176e1ebd473/asm-commons-9.2-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/9.1/36464a45d871779f3383a8a9aba2b26562a86729/asm-util-9.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/9.1/d09e58920a332647ed8c65ad6ea2e7692e449f40/asm-util-9.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/9.2/fbc178fc5ba3dab50fd7e8a5317b8b647c8e8946/asm-util-9.2.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-util/9.2/f04d12daefcb3cf02ef27e67c1ccbac24d2f5c6f/asm-util-9.2-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/9.1/4f61b83b81d8b659958f4bcc48907e93ecea55a0/asm-analysis-9.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/9.1/296a49fa21d815fc92eec1007ea2708983e8df2c/asm-analysis-9.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/9.2/7487dd756daf96cab9986e44b9d7bcb796a61c10/asm-analysis-9.2.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-analysis/9.2/296a49fa21d815fc92eec1007ea2708983e8df2c/asm-analysis-9.2-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.1/c333f2a855069cb8eb17a40a3eb8b1b67755d0eb/asm-tree-9.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.1/ef07227f641685b6473fd0fbb4931afd6539df1a/asm-tree-9.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.2/d96c99a30f5e1a19b0e609dbb19a44d8518ac01e/asm-tree-9.2.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm-tree/9.2/d7c4f2660898c227b2fb209f94ca15ae45722535/asm-tree-9.2-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/9.1/a99500cf6eea30535eeac6be73899d048f8d12a8/asm-9.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/9.1/3fb15dd478bf8dcb039aa0d035f9fff9e4229c61/asm-9.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/9.2/81a03f76019c67362299c40e0ba13405f5467bff/asm-9.2.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.ow2.asm/asm/9.2/51671fdebd3583f10254fab0e2077ed49c461650/asm-9.2-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -126,22 +142,22 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.18-38.0.14/f69d13f74364f0ca02da60962206fbdb7740c6e3/fmlcore-1.18-38.0.14.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.18-38.0.14/2e72e3cc4b0ea388aee783bf79ca63b1aa5e183a/fmlcore-1.18-38.0.14-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.18.1-39.0.64/596d66aeba6c370ab1f070a421268365799ed543/fmlcore-1.18.1-39.0.64.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/fmlcore/1.18.1-39.0.64/be67d4f1f19d21c7a6d76965814e95feb0496257/fmlcore-1.18.1-39.0.64-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/eventbus/5.0.3/f2317ed9d19271be8727a71ae3e5dfeb62715594/eventbus-5.0.3.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/eventbus/5.0.3/22b4fa2b3ee4106e29034346348ce6bc5b8d244c/eventbus-5.0.3-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/eventbus/5.0.7/5589e7511c4993054e6a80890618b46ed53519a0/eventbus-5.0.7.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/eventbus/5.0.7/893e672b5a7e768aeaf0fd4a6104021a4c5a7232/eventbus-5.0.7-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/forgespi/4.0.10/e08fb9a9e485abbbd380516c222e2b502eb0718e/forgespi-4.0.10.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/forgespi/4.0.10/6e3a5833aa9ece38fd901b6fe0187157a4bf9ae0/forgespi-4.0.10-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/forgespi/4.0.11/beba03c49f418c8d66aae30a6df69bde4fce2f18/forgespi-4.0.11.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/forgespi/4.0.11/6ca77f2060059bdace81c3606d774cee5d40d451/forgespi-4.0.11-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/coremods/5.0.1/386b00279628b105b2d507539c46e134e96f6237/coremods-5.0.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/coremods/5.0.1/a668cc3a77a31a42d9763d37fb348acbaa968f13/coremods-5.0.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/coremods/5.0.2/ca04eeee6c3764c151b2a2efa675057a7531acc4/coremods-5.0.2.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/coremods/5.0.2/eaf5c5d7d2a7962d59cd19099f96d39c1c5d4a8d/coremods-5.0.2-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -181,19 +197,19 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.14.1/9141212b8507ab50a45525b545b39d224614528b/log4j-core-2.14.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.14.1/7f640e4855733d9532eed15af62c54956e7b8224/log4j-core-2.14.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.15.0/ba55c13d7ac2fd44df9cc8074455719a33f375b9/log4j-core-2.15.0.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.15.0/9f65403ec51628737d799ebf1a02d56e4cbcd81d/log4j-core-2.15.0-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value=""/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-slf4j18-impl/2.15.0/88f72ad364bfc3a7cf43186fc17212f2b4bb8d97/log4j-slf4j18-impl-2.15.0.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-slf4j18-impl/2.15.0/a97557c733710589929407ba23f0449547a47a60/log4j-slf4j18-impl-2.15.0-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-slf4j18-impl/2.14.1/312b4d91b21160b9fab43600fa787f31e8cab930/log4j-slf4j18-impl-2.14.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-slf4j18-impl/2.14.1/e4cebbad5a5cbe091090346bcc3618bff8f5e73d/log4j-slf4j18-impl-2.14.1-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.15.0/4a5aa7e55a29391c6f66e0b259d5189aa11e45d0/log4j-api-2.15.0.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.15.0/b0b2c8ee48c4c57804056fe18494e61bb18404ab/log4j-api-2.15.0-sources.jar">
 		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.14.1/cd8858fbbde69f46bce8db1152c18a43328aae78/log4j-api-2.14.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.14.1/b2327c47ca413c1ec183575b19598e281fcd74d8/log4j-api-2.14.1-sources.jar">
-		<attributes>
-			<attribute name="gradle_used_by_scope" value="main,test"/>
+			<attribute name="gradle_used_by_scope" value=""/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.jline/jline-reader/3.12.1/4382ab1382c7b6f379377ed5f665dc2f6e1218bc/jline-reader-3.12.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.jline/jline-reader/3.12.1/88d7d2011ebec345d0a5c6237be1e7be864c7ec8/jline-reader-3.12.1-sources.jar">
@@ -221,17 +237,17 @@
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/bootstraplauncher/0.1.17/899fb8e3912bb7d14a6f9611de117f77db710ec3/bootstraplauncher-0.1.17.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/bootstraplauncher/0.1.17/ce8fa9abef6e4c3b863eac4ac50cec95a2acc887/bootstraplauncher-0.1.17-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/bootstraplauncher/1.0.0/f55ddbb35612c6745cefc47d1a0d6dbfb25d3982/bootstraplauncher-1.0.0.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/bootstraplauncher/1.0.0/84ac1a4e7786a5a67474c104d3397cb0435ac050/bootstraplauncher-1.0.0-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.18-38.0.14/c82384f867853c293be3682214c041eb90314660/javafmllanguage-1.18-38.0.14.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.18-38.0.14/d6f1942c714d5d3fa3ac19bfa54d83a34bac81e6/javafmllanguage-1.18-38.0.14-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.18.1-39.0.64/1b7f1da3e2b11bc566c7d719ae369715c4314a67/javafmllanguage-1.18.1-39.0.64.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/javafmllanguage/1.18.1-39.0.64/9b77638224f6c07cbedc65163a8186c63bc97807/javafmllanguage-1.18.1-39.0.64-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.18-38.0.14/30da8eb0ecec0d0d92258da1ebf1be803d439842/mclanguage-1.18-38.0.14.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.18-38.0.14/f24828e5a4d8048e0814fbda2e7b480b33e63e1d/mclanguage-1.18-38.0.14-sources.jar">
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.18.1-39.0.64/e4dc89311966e60301b2374edff56ee1252da956/mclanguage-1.18.1-39.0.64.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/net.minecraftforge/mclanguage/1.18.1-39.0.64/f84748bb268d3859d68ee4104e8a2f9de8873d63/mclanguage-1.18.1-39.0.64-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>
@@ -417,6 +433,21 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.glassfish/javax.json/1.0.4/3178f73569fd7a1e5ffc464e680f7a8cc784b85a/javax.json-1.0.4.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.glassfish/javax.json/1.0.4/ef782abad0d3f1d30644c4023a6bbc6fe371e23a/javax.json-1.0.4-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/securejarhandler/1.0.3/acbf5e3c8a38fb8bf824a54fe45eee121c510392/securejarhandler-1.0.3.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/cpw.mods/securejarhandler/1.0.3/e3cc8f2f8acba3da3dbc220d75779a595f359bed/securejarhandler-1.0.3-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.17.1/779f60f3844dadc3ef597976fcb1e5127b1f343d/log4j-core-2.17.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.17.1/311c00d3764db7fa3ba5f26d0acb5840e52454aa/log4j-core-2.17.1-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="main,test"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.17.1/d771af8e336e372fb5399c99edabe0919aeaf5b2/log4j-api-2.17.1.jar" sourcepath="C:/Users/Owner/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-api/2.17.1/d23d37cc41300a7f6eba7813855dbb224e2a3177/log4j-api-2.17.1-sources.jar">
 		<attributes>
 			<attribute name="gradle_used_by_scope" value="main,test"/>
 		</attributes>

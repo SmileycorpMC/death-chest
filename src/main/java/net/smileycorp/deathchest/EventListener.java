@@ -84,7 +84,7 @@ public class EventListener {
 		ChestBlockEntity te = new ChestBlockEntity(pos, Blocks.CHEST.defaultBlockState());
 
 		if(ConfigHandler.lockChest.get()) {
-			CompoundTag nbt=te.save(new CompoundTag());
+			CompoundTag nbt=te.saveWithoutMetadata();
 			nbt.putString("Lock", player.getStringUUID());
 			te.load(nbt);
 			te.setChanged();
