@@ -8,7 +8,8 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -90,7 +91,7 @@ public class EventListener {
 			te.setChanged();
 		}
 
-		te.setCustomName(new TextComponent(player.getDisplayName().getString()+"'s Loot"));
+		te.setCustomName(MutableComponent.create(new TranslatableContents(player.getDisplayName().getString()+"'s Loot")));
 		for (int slot = 0; slot<items.size(); slot++) te.setItem(slot, items.get(slot));
 		level.setBlockEntity(te);
 
@@ -140,7 +141,7 @@ public class EventListener {
 						nbt.remove("Lock");
 						te.load(nbt);
 						te.setChanged();
-						player.sendMessage(new TextComponent("Chest has been unlocked."), null);
+						player.displayClientMessage(MutableComponent.create(new TranslatableContents("Chest has been unlocked.")), true);
 						return;
 					}
 					ItemStack stack = player.getItemInHand(event.getHand());
@@ -153,7 +154,7 @@ public class EventListener {
 								nbt.remove("Lock");
 								te.load(nbt);
 								te.setChanged();
-								player.sendMessage(new TextComponent("Chest has been unlocked."), null);
+								player.displayClientMessage(MutableComponent.create(new TranslatableContents("Chest has been unlocked.")), true);
 								return;
 							}
 						}
