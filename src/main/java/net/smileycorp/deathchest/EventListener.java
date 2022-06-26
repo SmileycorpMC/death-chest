@@ -14,11 +14,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.ChestBlock;
-import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -72,7 +72,7 @@ public class EventListener {
 	private static boolean canPlace(Level level, BlockPos pos, int size) {
 		for (int i = 0; i < size; i++) {
 			Block block = level.getBlockState(pos.above(i)).getBlock();
-			if (!(level.isEmptyBlock(pos)|| block instanceof BushBlock || block instanceof LiquidBlock || block instanceof FireBlock)) return false;
+			if (!(level.isEmptyBlock(pos)|| block instanceof BushBlock || block instanceof LiquidBlock || block instanceof BaseFireBlock)) return false;
 		}
 		return true;
 	}
