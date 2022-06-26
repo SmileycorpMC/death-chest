@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
 import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -43,9 +44,12 @@ public class EventListener {
 				items.get(items.size()-1).add(item.getItem());
 			}
 			if (items.size()>0) {
+				BlockPos pos = new BlockPos(player.position());
 				for (int i = (int) Math.floor(player.position().y); i < level.getMaxBuildHeight() - items.size(); i++) {
-					BlockPos pos = new BlockPos(player.position());
-					if (!canPlace(level, pos, items.size())) continue;
+					if (!canPlace(level, pos, items.size())) {
+						pos = pos.above();
+						continue;
+					}
 					for (int j = 0; j < items.size(); j++) {
 						setChest(level, pos.above(j), player, items.get(j));
 					}
@@ -68,7 +72,7 @@ public class EventListener {
 	private static boolean canPlace(Level level, BlockPos pos, int size) {
 		for (int i = 0; i < size; i++) {
 			Block block = level.getBlockState(pos.above(i)).getBlock();
-			if (!(level.isEmptyBlock(pos)|| block instanceof BushBlock || block instanceof LiquidBlock)) return false;
+			if (!(level.isEmptyBlock(pos)|| block instanceof BushBlock || block instanceof LiquidBlock || block instanceof FireBlock)) return false;
 		}
 		return true;
 	}
