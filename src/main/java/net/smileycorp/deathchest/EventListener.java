@@ -15,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BushBlock;
@@ -44,9 +45,12 @@ public class EventListener {
 				items.get(items.size()-1).add(item.getItem());
 			}
 			if (items.size()>0) {
-				for (int i = (int) Math.floor(player.position().y); i < level.getMaxBuildHeight() - items.size(); i++) {
-					BlockPos pos = new BlockPos(player.position());
-					if (!canPlace(level, pos, items.size())) continue;
+				BlockPos pos = new BlockPos(player.position());
+				for (int i = pos.getY(); i < level.getMaxBuildHeight() - items.size(); i++) {
+					if (!canPlace(level, pos, items.size())){
+						pos = pos.above();
+						continue;
+					}
 					for (int j = 0; j < items.size(); j++) {
 						setChest(level, pos.above(j), player, items.get(j));
 					}
@@ -69,7 +73,7 @@ public class EventListener {
 	private static boolean canPlace(Level level, BlockPos pos, int size) {
 		for (int i = 0; i < size; i++) {
 			Block block = level.getBlockState(pos.above(i)).getBlock();
-			if (!(level.isEmptyBlock(pos)|| block instanceof BushBlock || block instanceof LiquidBlock)) return false;
+			if (!(level.isEmptyBlock(pos)|| block instanceof BushBlock || block instanceof LiquidBlock || block instanceof BaseFireBlock)) return false;
 		}
 		return true;
 	}
