@@ -45,7 +45,7 @@ public class EventListener {
 			}
 			if (items.size()>0) {
 				BlockPos pos = new BlockPos(player.position());
-				for (int i = (int) Math.floor(player.position().y); i < level.getMaxBuildHeight() - items.size(); i++) {
+				for (int i = pos.getY(); i < level.getMaxBuildHeight() - items.size(); i++) {
 					if (!canPlace(level, pos, items.size())) {
 						pos = pos.above();
 						continue;
