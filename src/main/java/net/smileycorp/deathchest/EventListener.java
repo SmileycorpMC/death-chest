@@ -36,8 +36,8 @@ public class EventListener {
 	@SubscribeEvent
 	public static void onDeathEvent(LivingDropsEvent event) {
 		Level level = event.getEntity().level;
-		if (event.getEntityLiving() instanceof Player &! level.isClientSide) {
-			Player player = (Player)event.getEntityLiving();
+		if (event.getEntity() instanceof Player &! level.isClientSide) {
+			Player player = (Player)event.getEntity();
 			List<NonNullList<ItemStack>> items = new ArrayList<NonNullList<ItemStack>>();
 			for (ItemEntity item : event.getDrops()) {
 				if (items.isEmpty()) items.add(NonNullList.create());
@@ -123,16 +123,16 @@ public class EventListener {
 				ItemStack stack = new ItemStack(Items.WRITTEN_BOOK);
 				if (ConfigHandler.lockChest.get()) nbt.putString("Key", player.getStringUUID());
 				stack.setTag(nbt);
-				if (!event.getPlayer().getInventory().add(stack)) event.getPlayer().drop(stack, true);
-				event.getPlayer().containerMenu.sendAllDataToRemote();
-				event.getPlayer().getInventory().setChanged();
+				if (!event.getEntity().getInventory().add(stack)) event.getEntity().drop(stack, true);
+				event.getEntity().containerMenu.sendAllDataToRemote();
+				event.getEntity().getInventory().setChanged();
 			}
 		}
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public static void interactBlockEvent(RightClickBlock event) {
-		Player player = event.getPlayer();
+		Player player = event.getEntity();
 		Level level = player.level;
 		if (!level.isClientSide) {
 			BlockPos pos = event.getPos();
