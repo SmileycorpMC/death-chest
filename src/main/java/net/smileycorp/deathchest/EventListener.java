@@ -9,7 +9,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.network.chat.contents.LiteralContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -56,7 +56,7 @@ public class EventListener {
 				items.get(items.size()-1).add(item.getItem());
 			}
 			if (items.size()>0) {
-				BlockPos pos = new BlockPos(player.position());
+				BlockPos pos = BlockPos.m_274446_(player.position());
 				for (int i = pos.getY(); i < level.getMaxBuildHeight() - items.size(); i++) {
 					if (!canPlace(level, pos, items.size())){
 						pos = pos.above();
@@ -106,7 +106,7 @@ public class EventListener {
 			te.setChanged();
 		}
 
-		te.setCustomName(MutableComponent.create(new TranslatableContents(player.getDisplayName().getString()+"'s Loot")));
+		te.setCustomName(MutableComponent.create(new LiteralContents(player.getDisplayName().getString()+"'s Loot")));
 		for (int slot = 0; slot<items.size(); slot++) te.setItem(slot, items.get(slot));
 		level.setBlockEntity(te);
 
@@ -156,7 +156,7 @@ public class EventListener {
 						nbt.remove("Lock");
 						te.load(nbt);
 						te.setChanged();
-						player.displayClientMessage(MutableComponent.create(new TranslatableContents("Chest has been unlocked.")), true);
+						player.displayClientMessage(MutableComponent.create(new LiteralContents("Chest has been unlocked.")), true);
 						return;
 					}
 					ItemStack stack = player.getItemInHand(event.getHand());
@@ -169,7 +169,7 @@ public class EventListener {
 								nbt.remove("Lock");
 								te.load(nbt);
 								te.setChanged();
-								player.displayClientMessage(MutableComponent.create(new TranslatableContents("Chest has been unlocked.")), true);
+								player.displayClientMessage(MutableComponent.create(new LiteralContents("Chest has been unlocked.")), true);
 								return;
 							}
 						}
